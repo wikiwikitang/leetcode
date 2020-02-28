@@ -46,7 +46,7 @@ const longestPalindromeHelper = (str, pivot) => {
 };
 
 const longestPalindrome = s => {
-  if (!s || s.lenth.length < 2) {
+  if (!s || s.length < 2) {
     return s;
   }
 
