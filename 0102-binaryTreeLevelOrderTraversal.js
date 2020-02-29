@@ -29,17 +29,14 @@ return its level order traversal as:
  */
 
 const levelOrderHelper = (node, level, retArray) => {
-  retArray[level] = retArray[level] || [];
-  //alternative approach => retArray[level] = Array.isArray(retArray[level]) ? retArray[level] : [];
-  retArray[level].push(node.val);
-
-  if (node.left) {
-    levelOrderHelper(node.left, level + 1, retArray);
+  if (!node) {
+    return;
   }
-
-  if (node.right) {
-    levelOrderHelper(node.right, level + 1, retArray);
-  }
+  retArray[level]
+    ? retArray[level].push(node.val)
+    : (retArray[level] = [node.val]);
+  levelOrderHelper(node.left, level + 1, retArray);
+  levelOrderHelper(node.right, level + 1, retArray);
 };
 
 var levelOrder = function(root) {
