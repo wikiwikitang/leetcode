@@ -25,17 +25,40 @@ Output: 3
  * @param {character[][]} grid
  * @return {number}
  */
-
-//DFS
-const floodBoundary = (i, j, XBoundry, YBoundary, grid) => {
-  if (i < 0 || i >= XBoundry || j < 0 || j >= YBoundary || grid[i][j] === "0") {
-    return;
+//bfs
+const isValid = ({ xOrigin, yOrigin }, XBoundry, YBoundary, grid) => {
+  if (
+    xOrigin < 0 ||
+    xOrigin >= XBoundry ||
+    yOrigin < 0 ||
+    yOrigin >= YBoundary ||
+    grid[xOrigin][yOrigin] === "0"
+  ) {
+    return false;
   }
-  grid[i][j] = "0";
-  floodBoundary(i - 1, j, XBoundry, YBoundary, grid);
-  floodBoundary(i + 1, j, XBoundry, YBoundary, grid);
-  floodBoundary(i, j - 1, XBoundry, YBoundary, grid);
-  floodBoundary(i, j + 1, XBoundry, YBoundary, grid);
+  return true;
+};
+
+//BFS
+const floodBoundary = (i, j, XBoundry, YBoundary, grid) => {
+  const array = [
+    { x: -1, y: 0 },
+    { x: 1, y: 0 },
+    { x: 0, y: -1 },
+    { x: 0, y: 1 }
+  ];
+  const queue = [{ xOrigin: i, yOrigin: j }];
+  while (queue.length > 0) {
+    const { xOrigin, yOrigin } = queue.pop();
+    grid[xOrigin][yOrigin] = "0";
+    array.forEach(({ x, y }) => {
+      //bfs for 4 possible coordiates
+      const newCoord = { xOrigin: xOrigin + x, yOrigin: yOrigin + y }; //construct new coordiate
+      if (isValid(newCoord, XBoundry, YBoundary, grid)) {
+        queue.push(newCoord);
+      }
+    });
+  }
 };
 
 var numIslands = function(grid) {
