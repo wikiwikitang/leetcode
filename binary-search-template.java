@@ -1,3 +1,15 @@
+/*
+Binary search is a famous question in algorithm.
+
+For a given sorted array (ascending order) and a target number, find the first index of this number in O(log n) time complexity.
+
+If the target number does not exist in the array, return -1.
+
+Example
+If the array is [1, 2, 3, 3, 4, 5, 10], for given target 3, return 2.
+*/
+
+
 // version 1: with jiuzhang template
 class Solution {
     /**
