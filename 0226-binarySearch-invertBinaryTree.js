@@ -58,11 +58,11 @@ var invertTree2 = function(root) {
     return root;
   }
   let stack = [root];
-  while (queue.length > 0) {
-    let node = queue.pop();
+  while (stack.length > 0) {
+    let node = stack.pop();
     if (node) {
       [node.left, node.right] = [node.right, node.left];
-      queue.push(node.left, node.right);
+      stack.push(node.left, node.right);
     }
   }
   return root;
